@@ -21,4 +21,4 @@ latexmk -pdf -interaction=nonstopmode manuscript.tex
 ```
 
 ## Note on author metadata
-The manuscript in this public snapshot still contains placeholder author information because submission-specific identity fields are finalized separately from the reproducibility package.
+The manuscript in this public snapshot includes the current single-author submission metadata provided for the journal version.
