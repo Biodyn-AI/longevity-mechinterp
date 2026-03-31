@@ -1,0 +1,7 @@
+dataset_id,pathway,n_scgpt_features,n_geneformer_features,n_cross_model_pairs,best_convergence_score
+aida_phase1_v1,inflammation_nfkb,16,1,16,0.06615533377002308
+aida_phase1_v1,interferon_antiviral,1,0,0,
+aida_phase1_v2,inflammation_nfkb,25,7,175,0.09570790670605568
+aida_phase1_v2,senescence_sasp,1,2,2,0.03560823524492077
+aida_phase1_v2,interferon_antiviral,0,2,0,
+aida_phase1_v2,proteostasis_upr,0,1,0,

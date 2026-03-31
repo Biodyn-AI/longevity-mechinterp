@@ -1,0 +1,10 @@
+stage,objective,key_result
+Stage 1,Frozen age probe,Best balanced accuracy range: 0.299-0.384
+Stage 2,Manifold geometry,Geometry pass datasets: 0/5
+Stage 3,SAE feature discovery,Robust features discovered (scGPT+Geneformer): 132
+Stage 4,Cross-model convergence,Cross-model pathway-matched pairs: 193
+Stage 6 strict,Model-specific claim promotion,Strict promotion passes: 0/4
+Stage 8 strict audit,Contrast+direction gate,Runs with >=1 full strict row: 1/19
+Stage 9,Deep-dive on surviving branch,Full strict at min_donors=200: 1
+Stage 10,Composition-matched forward pass,Full strict no longer passed (n_full_strict=0)
+Stage 11,Compmatched seed panel,Compmatched full strict pass rate: 0.00

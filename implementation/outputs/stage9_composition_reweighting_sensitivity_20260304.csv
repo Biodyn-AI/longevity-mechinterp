@@ -1,0 +1,5 @@
+ridge_alpha,effective_sample_size,ea_old_minus_random_flag,ea_young_minus_random_flag,ea_old_push_flag,ea_young_push_flag,op_old_minus_random_flag,op_young_minus_random_flag,ea_old_minus_random_shift,ea_young_minus_random_shift,pass_expected_age_reweighted_strict,pass_full_reweighted_strict
+0.1,423.70884826707953,positive,negative,positive,negative,positive,negative,9.279523126431988e-06,-0.0001474388262622,True,True
+1.0,423.89449244060506,positive,negative,positive,negative,positive,negative,-3.873418281966079e-05,-6.154595347651615e-05,True,True
+10.0,423.98766124088945,positive,negative,positive,negative,positive,negative,-4.569216684560673e-05,3.126992722535249e-06,True,True
+100.0,423.9996523915683,positive,negative,positive,negative,positive,negative,-9.123936990845792e-06,1.8891022527389725e-06,True,True

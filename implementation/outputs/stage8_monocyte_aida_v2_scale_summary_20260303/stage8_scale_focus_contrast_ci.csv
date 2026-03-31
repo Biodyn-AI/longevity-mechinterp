@@ -1,0 +1,25 @@
+intervention_scale,dataset_id,model,pathway,analysis_scope,cell_type,metric,contrast,n_donors,mean_delta,ci_low,ci_high,ci_flag
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_random,99,0.0009235284997397804,-3.653556345363092e-05,0.0019313141032398023,uncertain
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_random,127,-0.000995965937112178,-0.0016718549930521116,-0.0003501804578082382,negative
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_random,99,0.0018583379005535454,-0.00016239900728573948,0.0038520485001532784,uncertain
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_random,127,-0.0019623720485885034,-0.003255869981937678,-0.0006564382193423248,negative
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_young,99,0.00617036674416523,0.0048665536363167745,0.00745173572866128,positive
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_young,127,-0.001464756090082105,-0.0022936607810446746,-0.000632539046106769,negative
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_young,99,0.012340312847663975,0.009767160290454022,0.014934573295279502,positive
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,old_minus_young,127,-0.0029293022436183203,-0.004562245208872483,-0.001296669052887896,negative
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,young_minus_random,99,-0.0052468382444254506,-0.006411858575200095,-0.004083651508741518,negative
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,young_minus_random,127,0.0004687901529699274,-0.00028941686104627586,0.001212509082062445,uncertain
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,young_minus_random,99,-0.01048197494711043,-0.012776091960614596,-0.008180102201418623,negative
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_expected_age_mean,young_minus_random,127,0.0009669301950298166,-0.0006146055508781337,0.0023814049873373848,uncertain
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_random,99,-0.0006355835282339384,-0.001081157960861748,-0.0001812321288868872,negative
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_random,127,-0.0010329424406018252,-0.001324416887448495,-0.0007537790675560736,negative
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_random,99,-0.0012661332734035982,-0.0022011220012459194,-0.0003753253042049036,negative
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_random,127,-0.002057029671691344,-0.0026324666592823466,-0.00149618382495302,negative
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_young,99,0.00021752662606031083,-0.0003016583657362056,0.0007308320151010357,uncertain
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_young,127,-0.002193103954992769,-0.0025585941333263287,-0.0018402024706182041,negative
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_young,99,0.00043508726850215884,-0.0005833176908655557,0.001425862368238952,uncertain
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,old_minus_young,127,-0.004386029869119334,-0.0051084727889684255,-0.0037082946387432484,negative
+1.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,young_minus_random,99,-0.0008531101542942492,-0.0013419153373202062,-0.0003750704934652521,negative
+1.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,young_minus_random,127,0.0011601615143909433,0.0008672957627046787,0.0014557710583997297,positive
+2.0,aida_phase1_v2,geneformer,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,young_minus_random,99,-0.0017012205419057573,-0.0026893010783543125,-0.0007501413850279786,negative
+2.0,aida_phase1_v2,scgpt,inflammation_nfkb,within_cell_type,CD14-positive monocyte,delta_old_prob_mean,young_minus_random,127,0.0023290001974279905,0.00173743689324303,0.0029055801561073294,positive

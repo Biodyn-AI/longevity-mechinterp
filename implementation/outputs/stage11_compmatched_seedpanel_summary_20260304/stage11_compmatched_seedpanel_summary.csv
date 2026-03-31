@@ -1,0 +1,6 @@
+run_label,n_rows,n_expected_age_contrast_strict,n_full_contrast_strict,n_expected_age_strict,n_full_strict,passes_full_strict,direction_sign_agree_expected_age,direction_sign_agree_old_prob,geneformer_directional_pattern_ok,both_models_stronger_than_random,geneformer_old_push_delta_expected_age_mean,geneformer_old_push_expected_age_ci_flag,geneformer_random_push_delta_expected_age_mean,geneformer_random_push_expected_age_ci_flag,geneformer_young_push_delta_expected_age_mean,geneformer_young_push_expected_age_ci_flag,n_donors_geneformer
+stage10_compmatched_seed42,2,1,0,0,0,False,False,False,True,False,0.0776217086448549,positive,0.0545866765507769,positive,-9.409007357016526e-05,uncertain,340
+stage11_compmatched_seed101,2,0,0,0,0,False,False,False,False,False,0.0535514322293748,uncertain,0.1121378046685961,positive,0.1560449668996315,positive,334
+stage11_compmatched_seed202,2,1,1,0,0,False,True,True,False,False,0.0997289861928909,positive,0.1049426684158243,positive,0.0985771134690044,positive,333
+stage11_compmatched_seed303,2,0,0,0,0,False,False,False,False,True,0.0643977815261227,positive,0.0508276499191654,uncertain,0.0499726134185789,uncertain,337
+stage9_seedexpansion,2,1,1,1,1,True,False,False,True,True,0.0582520150728823,positive,-0.0911357880623241,negative,-0.2234899136700908,negative,424

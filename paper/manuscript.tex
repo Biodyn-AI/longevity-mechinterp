@@ -1,0 +1,240 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[authoryear]{natbib}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\title{A Donor-Aware Framework for Mechanistic Interpretability of Aging Signals in Single-Cell Foundation Models}
+\author{[Author names and affiliations to be inserted before submission]}
+\date{March 31, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Single-cell foundation models may encode aging biology, but apparent signals can easily be distorted by donor identity and cell-composition differences. We built a donor-aware interpretability framework to test aging-related structure in frozen scGPT and Geneformer embeddings from age-labeled human single-cell datasets. The workflow combines donor-held-out age decoding, sparse autoencoder feature discovery, cross-model pathway matching, latent-space intervention tests, donor-bootstrap confidence intervals, and progressively stricter confound controls.
+
+Across five datasets, frozen representations contained detectable age information, with best donor-aware balanced accuracy 0.384. Sparse autoencoders recovered 132 donor-aware robust features across the two core AIDA cohorts, and cross-model pathway matching yielded 193 paired features, most strongly concentrated in inflammation / NF-kappaB programs in AIDA phase 1 v2. The clearest positive intervention result appeared in a global Geneformer inflammation branch: old-versus-random and old-versus-young expected-age contrasts remained significant after split expansion and donor-threshold tightening up to 400 donors. In a monocyte-restricted analysis on AIDA phase 1 v1, both scGPT and Geneformer also showed positive old-versus-random responses at intervention scale 2.0.
+
+Under the strictest control, however, the strongest global branch weakened. Fully composition-matched forward-pass reruns eliminated full strict replication, with 0 of 4 matched-seed reruns passing the full claim gate. These results show that frozen single-cell foundation models do contain biologically coherent aging-related structure, especially around inflammatory programs, but they also show that donor-aware and composition-aware stress tests are essential before treating those patterns as robust mechanisms.
+\end{abstract}
+
+\noindent\textbf{Keywords:} aging; biogerontology; single-cell transcriptomics; foundation models; mechanistic interpretability; inflammation
+
+\section{Introduction}
+Aging does not appear as a single transcriptomic program. Instead, it emerges through shifts in immune activation, stress response, proteostasis, and cell composition that vary across cell types and cohorts. Single-cell foundation models compress these patterns into latent representations, which raises an attractive question for biogerontology: do those latent spaces contain interpretable aging biology, or only weak predictive signal? Two recent foundation models for single-cell transcriptomics, Geneformer \citep{theodoris2023geneformer} and scGPT \citep{cui2024scgpt}, provide suitable frozen backbones for testing that question.
+
+This distinction matters because age can be decodable without supporting a defensible biological mechanism. Donor identity, cell-type imbalance, and cohort-specific composition shifts can all create apparent aging signals that disappear under stronger controls. We therefore focused on a harder target: not just whether age can be decoded from frozen embeddings, but whether candidate aging programs remain directional, biologically coherent, and donor-aware under increasingly strict stress tests.
+
+\section{Methods}
+\subsection{Data}
+Core analyses centered on age-labeled human immune single-cell data already available in-project, with primary focus on AIDA phase 1 v1 and AIDA phase 1 v2. External and reference datasets included Tabula Sapiens-derived assets \citep{tabula2022}, the Yazar immune single-cell eQTL cohort \citep{yazar2022}, and Allen immune aging-derived subsets.
+
+The strongest-branch analyses were performed on AIDA phase 1 v2, which had the largest donor support in the deep-dive stage (\(n\approx 424\) in the baseline expanded-split run and \(n\approx 333\)--340 in the composition-matched reruns).
+
+\subsection{Models}
+We used frozen representations from:
+\begin{itemize}
+  \item \textbf{scGPT} (contextual layer \texttt{scgpt\_layer\_09}) \citep{cui2024scgpt}
+  \item \textbf{Geneformer} (contextual representation) \citep{theodoris2023geneformer}
+\end{itemize}
+
+Neither model was fine-tuned for age prediction in the core pipeline.
+
+\subsection{Interpretability workflow}
+The analysis proceeded in four blocks. First, we asked whether age-related signal was present at all, using donor-held-out linear probes and simple manifold diagnostics (Stages 1--2). Second, we searched for interpretable latent structure using sparse autoencoders and cross-model pathway matching (Stages 3--4), motivated by sparse dictionary learning frameworks \citep{bricken2023monosemanticity,templeton2024scaling}. Third, we tested candidate pathways with targeted interventions, donor-bootstrap confidence intervals, and conservative promotion gates (Stages 5--8). Finally, we stress-tested the strongest surviving branch with donor-threshold sweeps, donor-composition reweighting, fully composition-matched reruns, and multi-seed matched reruns (Stages 9--11).
+
+Bootstrap confidence intervals used nonparametric donor resampling \citep{efron1979bootstrap}.
+
+\subsection{Strict gate policy}
+Claims were promoted only when multiple directional checks agreed: expected-age contrasts had to point in the correct direction, marginal effects had to remain supportive, and old-probability shifts had to be consistent. This policy was intentionally stricter than contrast-only screening because the project goal was mechanism-grade evidence rather than loose signal detection.
+
+\section{Results}
+\subsection{Global trajectory across stages}
+Table~\ref{tab:stage-overview} summarizes stage-level outcomes.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Stage-level outcomes across the full pipeline.}
+\label{tab:stage-overview}
+\begin{tabularx}{\textwidth}{p{1.8cm}p{3.0cm}X}
+\toprule
+\textbf{Stage} & \textbf{Objective} & \textbf{Key outcome} \\
+\midrule
+1 & Frozen age probe & Best balanced accuracy range: 0.299--0.384 across 5 datasets \\
+2 & Manifold geometry & Geometry gate passes: 0/5 datasets \\
+3 & SAE features & 132 robust donor-aware sparse features retained \\
+4 & Cross-model convergence & 193 pathway-matched cross-model feature pairs \\
+6 (strict) & Model-specific claim promotion & 0/4 strict claim passes \\
+8 (strict audit) & Contrast + marginal strict gate & 1/19 runs with at least one full strict row \\
+9 & Deep-dive robustness & Surviving row stable up to min-donors=400; fails at 500 \\
+10 & Composition controls & Reweighting preserved strict pass; full compmatched forward rerun removed full strict pass \\
+11 & Compmatched seed panel & 0/4 full strict replications under composition-matched seeds \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Age can be decoded, but global age geometry is not robust (Stages 1--2)}
+Frozen probes reached moderate performance (best \(\mathrm{BA}=0.3838\) in AIDA phase 1 v2), indicating that age-associated signal is present in the frozen representations. However, the manifold-alignment criteria did not pass robustness gates in any dataset (0/5), even after donor-aware within-cell-type checks. Figure~\ref{fig:stage12} shows this separation clearly: age is detectable, but it does not organize the global latent geometry in a stable way.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig1_stage1_stage2_overview.png}
+\caption{Detection versus geometry. Left: donor-aware age-decoding performance by dataset. Right: age-alignment geometry statistics remain weak and inconsistent, with no dataset passing the geometry gate.}
+\label{fig:stage12}
+\end{figure}
+
+\subsection{Sparse features and cross-model overlap point to inflammatory programs (Stages 3--4)}
+Sparse autoencoder analysis identified many donor-aware robust features (91 in scGPT core runs and 41 in Geneformer core runs). Figure~\ref{fig:stage3} summarizes these counts.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/fig2_stage3_robust_features.png}
+\caption{Donor-aware robust sparse features retained after filtering. Most of the signal comes from the two AIDA cohorts.}
+\label{fig:stage3}
+\end{figure}
+
+Cross-model pathway matching produced 193 pairs in aggregate. This overlap was dominated by inflammation / NF-kappaB in AIDA phase 1 v2 (175 pairs; best convergence score 0.0957), suggesting that both models capture a shared inflammatory latent program rather than completely unrelated features (Figure~\ref{fig:stage4}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth]{figures/fig3_stage4_pathway_convergence.png}
+\caption{Cross-model pathway convergence. Inflammation / NF-kappaB dominates the shared signal between scGPT and Geneformer.}
+\label{fig:stage4}
+\end{figure}
+
+\subsection{The clearest cell-type-specific signal appears in AIDA v1 monocytes (Stage 8)}
+A clear positive result appeared in AIDA phase 1 v1 CD14 monocytes for inflammation / NF-kappaB at intervention scale 2.0:
+\begin{itemize}
+  \item Geneformer old-minus-random expected-age contrast: 0.0357 [0.0314, 0.0398], positive.
+  \item scGPT old-minus-random expected-age contrast: 0.0419 [0.0368, 0.0474], positive.
+\end{itemize}
+In contrast, AIDA phase 1 v2 monocytes were weak or discordant (Geneformer uncertain; scGPT negative), emphasizing that the signal is real but cohort-dependent (Figure~\ref{fig:stage8}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.90\textwidth]{figures/fig4_stage8_monocyte_scale_contrast.png}
+\caption{Monocyte-restricted inflammation intervention results. Positive old-versus-random effects are strongest in AIDA phase 1 v1, especially at intervention scale 2.0.}
+\label{fig:stage8}
+\end{figure}
+
+\subsection{A single global Geneformer branch survives the deep-dive stress test (Stage 9)}
+Under strict gating, one global branch survived: the AIDA phase 1 v2 Geneformer inflammation / NF-kappaB branch evaluated at global scope and intervention scale 2.0. After expanding split seeds (60 splits per model), this branch remained full-strict positive up to a minimum donor threshold of 400, failing only at 500 because donor coverage became too sparse (Figure~\ref{fig:stage9sweep}).
+
+The key Geneformer expected-age contrasts in this deep-dive run were:
+\begin{itemize}
+  \item old-minus-random: 0.1494 [0.1423, 0.1564], positive
+  \item young-minus-random: -0.1324 [-0.1379, -0.1267], negative
+  \item old-minus-young: 0.2817 [0.2698, 0.2940], positive
+\end{itemize}
+
+This was the strongest positive mechanistic candidate in the full project trajectory.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/fig5_stage9_donor_threshold_sweep.png}
+\caption{Donor-threshold stress test for the strongest surviving global branch. The full strict gate remains satisfied until the minimum donor threshold reaches 500.}
+\label{fig:stage9sweep}
+\end{figure}
+
+\subsection{Composition matching weakens the strongest global signal (Stages 10--11)}
+\textbf{Positive control result (reweighting):} donor-composition reweighting preserved strict pass status across ridge penalties of 0.1, 1, 10, and 100, with near-zero effect shifts.
+
+\textbf{Stronger control result (full composition-matched forward rerun):} the full strict pass disappeared (\(n_{\mathrm{full\ strict}}=0\)) despite one expected-age contrast-strict row. Figure~\ref{fig:stage10_11} shows both points: simple reweighting barely changes the estimated effect sizes, but fully matched reruns do not preserve the baseline claim. Figure~\ref{fig:bootcompare} compares the donor-bootstrap intervention intervals before and after full composition matching.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig6_composition_controls_and_seedpanel.png}
+\caption{Composition controls. Left: donor-composition reweighting produces only negligible changes in the effect estimates. Right: the baseline strict claim does not replicate under composition-matched reruns, although one matched rerun retains the weaker Geneformer directional pattern.}
+\label{fig:stage10_11}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/fig7_geneformer_bootstrap_stage9_vs_stage10.png}
+\caption{Geneformer donor-bootstrap intervention effects before and after full composition matching. The aging-program push remains positive, but the overall directional structure becomes less clean once full matching is enforced.}
+\label{fig:bootcompare}
+\end{figure}
+
+\subsection{Matched reruns do not reproduce the baseline claim (Stage 11)}
+A four-run composition-matched seed panel (seed42, 101, 202, 303) yielded:
+\begin{itemize}
+  \item \textbf{0/4} full strict replications,
+  \item Geneformer directional-pattern criterion retained in \textbf{1/4} runs,
+  \item unstable random/young intervention directional structure across seeds.
+\end{itemize}
+
+Table~\ref{tab:seedpanel} summarizes the panel-level strict outcomes.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Stage 11 composition-matched seed panel summary (strict outcomes).}
+\label{tab:seedpanel}
+\begin{tabularx}{\textwidth}{Xcccc}
+\toprule
+\textbf{Run} & \textbf{$n_{\text{full strict}}$} & \textbf{Aging push} & \textbf{Random control} & \textbf{Young-program push} \\
+\midrule
+Baseline expanded-split run & 1 & positive & negative & negative \\
+Composition-matched rerun, seed 42 & 0 & positive & positive & uncertain \\
+Composition-matched rerun, seed 101 & 0 & uncertain & positive & positive \\
+Composition-matched rerun, seed 202 & 0 & positive & positive & positive \\
+Composition-matched rerun, seed 303 & 0 & positive & uncertain & uncertain \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Discussion}
+A clear pattern emerged across the project. Frozen single-cell foundation models do contain aging-related structure, and some of that structure is biologically interpretable. We repeatedly recovered donor-aware sparse features, saw substantial cross-model overlap in inflammatory programs, and observed a strong cell-type-local monocyte signal in AIDA phase 1 v1. These are not trivial findings, because they appeared without age-specific fine-tuning.
+
+At the same time, the strongest global signal did not survive the most demanding control. The AIDA phase 1 v2 Geneformer inflammation branch looked convincing after split expansion, donor-threshold tightening, and donor-composition reweighting. But once we enforced full composition matching and repeated the analysis across multiple matched seeds, the full strict claim did not replicate. That is not a side note. It is the central methodological result of the study.
+
+\subsection{Interpretation for longevity-focused mechanistic research}
+For longevity-focused mechanistic work, these results suggest a practical strategy:
+\begin{itemize}
+  \item Use frozen models first to test signal existence and feature interpretability.
+  \item Promote candidate mechanisms only after donor-aware, cell-type-aware, and composition-aware replication.
+  \item Distinguish \emph{model-specific interpretable signal} from \emph{cross-model robust mechanism}; these are not equivalent.
+\end{itemize}
+
+\subsection{Limitations}
+Key limitations include: (i) limited donor support in some strata and external subsets; (ii) reduced power under strict within-cell-type constraints; (iii) sensitivity of final strict status to composition-matched sample realization; and (iv) incomplete high-power composition-matched reruns due runtime constraints.
+
+\section{Conclusion}
+This project establishes that frozen scGPT and Geneformer representations contain meaningful, interpretable aging-associated latent programs, with particularly strong intermediate evidence around inflammatory biology. However, under repeated fully composition-matched forward-pass controls, the strongest global strict-claim branch did not replicate. The most accurate summary is therefore: \textbf{promising mechanistic signal, not yet a promotion-grade robust mechanism}.
+
+The highest-value next step is a higher-power composition-matched consensus protocol (larger matched cell budgets and pooled multi-resample decision rules) to determine whether the Stage-9 signal reflects a true stable mechanism or a sampling-sensitive artifact.
+
+\section*{Statements and Declarations}
+\textbf{Funding:} The author received no specific funding for this work. \\
+\textbf{Competing interests:} The author declares no competing interests. \\
+\textbf{Author contributions:} The sole author conceived the study, designed the analyses, executed the computational work, interpreted the results, and wrote the manuscript. \\
+\textbf{Ethics approval:} This study analyzed previously generated datasets and did not involve new recruitment or intervention on human participants within the present work. \\
+\textbf{Consent to participate:} Not applicable. \\
+\textbf{Consent for publication:} Not applicable. \\
+\textbf{Data availability:} The public project repository includes the processed summary artifacts needed to reproduce the manuscript figures and tables. Access to the raw underlying single-cell datasets is governed by the original data providers; the repository documents dataset provenance and contains derived summary outputs only. \\
+\textbf{Code availability:} The analysis code, manuscript source, figure-generation script, and reproducibility notes are available at \url{https://github.com/Biodyn-AI/longevity-mechinterp}. \\
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

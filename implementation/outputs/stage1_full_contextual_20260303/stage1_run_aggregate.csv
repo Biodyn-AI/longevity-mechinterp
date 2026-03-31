@@ -1,0 +1,6 @@
+dataset_id,dataset_path,status,best_representation,best_balanced_accuracy_mean,best_macro_f1_mean,n_cells_sampled,n_donors_sampled,n_age_classes
+aida_phase1_v2,/Volumes/Crucial X6/MacBook/biomechinterp/biodyn-work/subproject_51_longevity_age_mechinterp/implementation/data_downloads/raw/aida_phase1_v2.h5ad,ok,expr_svd,0.3838252540453253,0.37358982943547475,3000,622,4
+aida_phase1_v1,/Volumes/Crucial X6/MacBook/biomechinterp/biodyn-work/subproject_51_longevity_age_mechinterp/implementation/data_downloads/raw/aida_phase1_v1.h5ad,ok,expr_svd,0.3528844206397254,0.3344059224024426,3000,504,4
+yazar_eqtl_981_donors,/Volumes/Crucial X6/MacBook/biomechinterp/biodyn-work/subproject_51_longevity_age_mechinterp/implementation/data_downloads/raw/yazar_eqtl_981_donors.h5ad,ok,expr_svd,0.29937691322432675,0.28734898796535385,3000,940,4
+allen_immune_health_atlas_full,/Volumes/Crucial X6/MacBook/biomechinterp/biodyn-work/subproject_51_longevity_age_mechinterp/implementation/data_downloads/raw/allen_immune_health_atlas_full.h5ad,ok,expr_svd,0.3019980513663983,0.28381600877291857,3000,108,4
+allen_imm_of_aging_b_plasma_cells,/Volumes/Crucial X6/MacBook/biomechinterp/biodyn-work/subproject_51_longevity_age_mechinterp/implementation/data_downloads/raw/allen_imm_of_aging_b_plasma_cells.h5ad,ok,expr_svd,0.3473401229150771,0.34590938985111874,3000,225,4

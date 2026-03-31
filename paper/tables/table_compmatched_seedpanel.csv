@@ -1,0 +1,6 @@
+run_label,n_full_strict,n_expected_age_contrast_strict,n_full_contrast_strict,geneformer_old_push_expected_age_ci_flag,geneformer_random_push_expected_age_ci_flag,geneformer_young_push_expected_age_ci_flag
+"Composition-matched rerun, seed 42",0,1,0,positive,positive,uncertain
+"Composition-matched rerun, seed 101",0,0,0,uncertain,positive,positive
+"Composition-matched rerun, seed 202",0,1,1,positive,positive,positive
+"Composition-matched rerun, seed 303",0,0,0,positive,uncertain,uncertain
+Baseline expanded-split run,1,1,1,positive,negative,negative

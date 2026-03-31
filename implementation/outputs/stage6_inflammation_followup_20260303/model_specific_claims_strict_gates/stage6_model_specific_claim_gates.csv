@@ -1,0 +1,5 @@
+dataset_id,model,claim_tier,promotion_status,gate_pass_all_required,gate_old_ci_positive_required,gate_dose_shape_required,gate_specificity_required_or_na,gate_young_ci_negative_required,gate_celltype_ci_required
+aida_phase1_v1,geneformer,promising_model_specific,blocked,False,True,True,True,False,False
+aida_phase1_v1,scgpt,promising_model_specific,blocked,False,True,True,True,False,False
+aida_phase1_v2,scgpt,promising_model_specific,blocked,False,True,True,True,False,False
+aida_phase1_v2,geneformer,supportive_but_ci_weak,blocked,False,False,True,True,True,False
